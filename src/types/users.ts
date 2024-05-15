@@ -9,3 +9,8 @@ export interface IUser {
 export interface IUsers {
     users: IUser[]
 }
+
+export interface DropdownTypes {
+    keyName: string | number;
+    keyValue: string | number;
+}

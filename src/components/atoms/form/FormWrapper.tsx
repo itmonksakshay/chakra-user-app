@@ -1,5 +1,5 @@
 
-import { FormProvider } from 'react-hook-form';
+import { FormProvider } from "react-hook-form"
 
 interface IProps {
     methods: any;
