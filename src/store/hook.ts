@@ -1,11 +1,11 @@
 import { bindActionCreators } from "@reduxjs/toolkit";
 import { RootState } from ".";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { userActions } from "./services/userSlice";
+import { userModalActions } from "./services/userModalSlice";
 import { postActions } from "./services/postSlice";
 
 const actions = {
-    ...userActions,
+    ...userModalActions,
     ...postActions
 };
 

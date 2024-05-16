@@ -6,7 +6,7 @@ import { DropdownTypes } from '@/types/users';
 
 type IProps = {
     label: string,
-    dropDownItem: Array<DropdownTypes | null>
+    dropDownItem: Array<DropdownTypes>
 } & SelectProps & UseControllerProps;
 
 const FormLevelDropdown = ({
@@ -22,13 +22,19 @@ const FormLevelDropdown = ({
             name={name}
             control={control}
             {...extraProps}
-            render={({ field: { onChange, value } }) => (
+            render={({ field}) => (
                 <InputDropdownField
+                    value={field.value || ''}
+                    onChange={field.onChange}
                     name={name}
                     label={label}
-                    onChange={onChange}
                     placeholder={placeholder}
                     dropDownItem={dropDownItem}
+                    errorMessage={
+                        errors?.root
+                            ? String(errors.root[name]?.message || "")
+                            : String(errors[name]?.message || "")
+                    }
                 />
             )}
         />

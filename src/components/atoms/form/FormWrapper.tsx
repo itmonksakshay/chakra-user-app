@@ -11,7 +11,7 @@ interface IProps {
 const FormWrapper = ({ methods, children, ...extraProps }: IProps) => {
     return (
         <FormProvider {...methods}>
-            <div {...extraProps}>{children}</div>
+            <form {...extraProps}>{children}</form>
         </FormProvider>
     )
 }

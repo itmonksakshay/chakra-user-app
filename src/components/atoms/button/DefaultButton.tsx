@@ -2,14 +2,15 @@ import React from 'react'
 import { Button, ButtonProps } from '@chakra-ui/react'
 
 type IProps = {
-    label: string
+    label: string,
 } & ButtonProps;
 
 const DefaultButton = ({
-    label
+    label,
+    ...extraProps
 }: IProps) => {
     return (
-        <Button colorScheme='teal' variant='solid'>
+        <Button colorScheme='teal' variant='solid' {...extraProps} >
             {label}
         </Button>
     )
