@@ -1,5 +1,6 @@
 "use client"
 
+import DefaultButton from '@/components/atoms/button/DefaultButton';
 import FormLevelDropdown from '@/components/atoms/form/FormLevelDropdown';
 import FormLevelInput from '@/components/atoms/form/FormLevelInput';
 import FormWrapper from '@/components/atoms/form/FormWrapper';
@@ -74,6 +75,9 @@ export default function Home() {
               { keyName: "option 1", keyValue: "option1" },
               { keyName: "option 2", keyValue: "option2" }
             ]}
+          />
+          <DefaultButton 
+            label='Submit'
           />
         </FormWrapper>
       </Box>

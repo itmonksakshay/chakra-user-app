@@ -1,10 +1,16 @@
 import React from 'react'
-import { Button } from '@chakra-ui/react'
+import { Button, ButtonProps } from '@chakra-ui/react'
 
-const DefaultButton = () => {
+type IProps = {
+    label: string
+} & ButtonProps;
+
+const DefaultButton = ({
+    label
+}: IProps) => {
     return (
         <Button colorScheme='teal' variant='solid'>
-            Button
+            {label}
         </Button>
     )
 }
