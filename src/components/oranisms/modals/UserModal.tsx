@@ -45,7 +45,6 @@ const UserModal = () => {
   }
 
 
-
   const emailPatten = /\S+@\S+\.\S+/;
 
   return (

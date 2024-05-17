@@ -1,3 +1,4 @@
+import { IComment, IPost } from '@/types/post';
 import { IUser } from '@/types/users';
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -6,21 +7,26 @@ const token = `${process.env.NEXT_PUBLIC_APP_PRIMARY_TOKEN}`
 
 export const coreApi = createApi({
   reducerPath: 'coreApi',
-  baseQuery: fetchBaseQuery({ 
+  baseQuery: fetchBaseQuery({
     baseUrl: API_PATH,
     prepareHeaders(headers) {
       if (token) {
-          headers.set('authorization', `Bearer ${token}`);
+        headers.set('authorization', `Bearer ${token}`);
       }
       return headers;
-  },
+    },
   }),
-  tagTypes: ["posts","users"],
+  tagTypes: ["posts", "users", "comments"],
   endpoints: (builder) => ({
     getUsers: builder.query<IUser[], void>({
       query: () => "users",
       providesTags: ["users"]
     }),
+
+    getUserById: builder.query<IUser, number>({
+      query: (id) => `users/${id}`
+    }),
+
     createUser: builder.mutation<any, any>({
       query: (user) => ({
         url: "users",
@@ -29,19 +35,36 @@ export const coreApi = createApi({
       }),
       invalidatesTags: ["users"]
     }),
-    getPosts: builder.query<any, any>({
-      query: (data) => data,
-      providesTags: ["users"]
+
+    getUserPosts: builder.query<IPost[], number>({
+      query: (id) => `users/${id}/posts`,
+      providesTags: ["posts"]
     }),
+
     createPost: builder.mutation<any, any>({
-      query: (post) => ({
-        url:"posts",
+      query: ({ user_id, ...post }) => ({
+        url: `users/${user_id}/posts`,
         method: "POST",
         body: post
       }),
       invalidatesTags: ["posts"]
-    })
+    }),
+
+    getPostComments: builder.query<IComment[], number>({
+      query: (id) => `posts/${id}/comments`,
+      providesTags: ["comments"]
+    }),
+
+    createComment: builder.mutation<any, any>({
+      query: ({ post_id, ...comment }) => ({
+        url: `posts/${post_id}/comments`,
+        method: "POST",
+        body: comment
+      }),
+      invalidatesTags: ["comments"]
+    }),
+
   }),
 })
 
-export const { useGetUsersQuery, useCreateUserMutation } = coreApi;
+export const { useGetUsersQuery, useGetUserByIdQuery, useCreateUserMutation, useGetUserPostsQuery, useGetPostCommentsQuery, useCreateCommentMutation, useCreatePostMutation } = coreApi;

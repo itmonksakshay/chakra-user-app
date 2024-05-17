@@ -1,14 +1,14 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { coreApi } from "./api/coreApi";
 import { userModalReducer } from "./services/userModalSlice";
-import { postReducer } from "./services/postSlice";
+import { postModalReducer } from "./services/postModalSlice";
 
 export const store = () =>
     configureStore({
         reducer: {
             [coreApi.reducerPath]: coreApi.reducer,
             users: userModalReducer,
-            posts: postReducer
+            posts: postModalReducer
         },
         middleware: (getDefaultMiddleware) =>
             getDefaultMiddleware().concat([
